@@ -22,9 +22,7 @@ public class TipCalculator {
 
                 while (!done) {
                     System.out.print("Enter your item: ");
-                    try {
-                            food = scan.nextLine();
-                    }
+                    food = scan.nextLine();
                     foods.add(food);
                     done = (foods.contains("Done"));
                     System.out.println(done);
