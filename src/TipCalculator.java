@@ -1,49 +1,57 @@
 import java.util.*;
+import java.text.*;
 public class TipCalculator {
-        public static void main(String[] args) {
-            Scanner scan = new Scanner(System.in);
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        DecimalFormat df = new DecimalFormat("#.00");
+        ArrayList<Object> fullOrder = new ArrayList<Object>();
 
-            double itemCost = 0;
-            double total = 0;
-            boolean done = false;
-            String food;
-            ArrayList<String> foods = new ArrayList<String>();
-            ArrayList<String> prices = new ArrayList<String>();
+        //list variables
+        double itemCost;
+        String food = "0";
+        double total = 0;
 
-            System.out.println("Welcome to a Restaurant!");
-            System.out.print("How many people are you dining with?: ");
-            int people = scan.nextInt();
-            System.out.print("What's the tip percentage? (0 - 100): ");
-            double tipPercentage = scan.nextDouble();
-            System.out.println("------------------------");
-            System.out.println("Instructions: \n1. Enter the name of the item you would like to order (Type 'Done' if you are finished ordering)");
-            System.out.println("2. Enter the cost of the item you are ordering");
+        //printing info
+        System.out.println("Welcome to a Restaurant!");
+        System.out.print("How many people are you dining with?: ");
+        int people = scan.nextInt();
+        System.out.print("What percentage would you like to tip? (0 - 100): ");
+        double tipPercentage = scan.nextDouble();
+        System.out.println("------------------------");
+        System.out.println("Instructions: \n1. Enter the name of the item you would like to order (Type 'Done' if you are finished ordering)");
+        System.out.println("2. Enter the cost of the item you are ordering");
+        scan.nextLine(); //clearing scanner
 
-            while (!done) {
-                System.out.print("Enter your item: ");
-                food = scan.nextLine();
-                foods.add(food);
-                scan.nextLine();
-                done = Objects.equals(food, "Done");
-                if (!done) {
-                    System.out.print("Enter your items cost: ");
-                    itemCost = scan.nextDouble();
-                    total += itemCost;
-                }
+        while (!food.equals("Stop") && !food.equals("Done")) { //while loop that asks for food
+            System.out.print("What would you like to order?: ");
+            food = scan.nextLine();
+            if (!food.equals("Stop") && !food.equals("Done")) {
+                System.out.print("How much is the item you are ordering?: ");
+                itemCost = scan.nextDouble();
+                Order newFood = new Order(food,itemCost); //creates a new object
+                fullOrder.add(newFood); //adds object
+                total += itemCost; //calculates total
+                scan.nextLine(); //clears scanner
             }
-            total ++;
-            double tip = Math.round(((tipPercentage / 100) * total) * 100) / 100.0;
-            System.out.println("------------------------");
-            /*for (int i = 0; i < foods.size() + 1; i++) {
-                System.out.println("Item #" + i + ": " + foods.get(i) + " - $" + prices.get(i));
-            }*/
-            System.out.println("Total bill before tip: $" + total);
-            System.out.println("Total tip percentage: " + tipPercentage + "%");
-            System.out.println("Total tip: $" + tip);
-            System.out.println("Total bill with tip: $" + Math.round((total + tip) * 100) / 100.0);
-            System.out.println("Cost per person before tip: $" + Math.round(total / people * 100) / 100.0);
-            System.out.println("Tip per person: $" + Math.round(tip / people * 100) / 100.0);
-            System.out.println("Total cost per person: $" + Math.round((tip + total) / people * 100) / 100.0);
-            System.out.println("------------------------");
+        }
+        System.out.println("------------------------");
+        //printing items ordered
+        for (int i = 0; i < fullOrder.size(); i++) {
+            Order newFood = (Order) fullOrder.get(i);
+            System.out.println("Item #" + (i + 1) + ": " + newFood.foodName + " - $" + df.format(newFood.foodPrice));
+        }
+        //Calculating total tip
+        double tip = Math.round(((tipPercentage / 100) * total) * 100) / 100.0;
+
+        //printing statements
+        System.out.println("------------------------");
+        System.out.println("Total bill before tip: $" + df.format(total));
+        System.out.println("Total tip percentage: " + df.format(tipPercentage) + "%");
+        System.out.println("Total tip: $" + df.format(tip));
+        System.out.println("Total bill with tip: $" + df.format(Math.round((total + tip) * 100) / 100.0));
+        System.out.println("Cost per person before tip: $" + df.format(Math.round(total / people * 100) / 100.0));
+        System.out.println("Tip per person: $" + df.format(Math.round(tip / people * 100) / 100.0));
+        System.out.println("Total cost per person: $" + df.format(Math.round((tip + total) / people * 100) / 100.0));
+        System.out.println("------------------------");
     }
 }
