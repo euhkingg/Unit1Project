@@ -4,7 +4,7 @@ public class TipCalculator {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         DecimalFormat df = new DecimalFormat("#.00"); //used to format decimals
-        ArrayList<Object> fullOrder = new ArrayList<>(); //making lists
+        ArrayList<Order> fullOrder = new ArrayList<>(); //making lists
 
         //variables
         double itemCost;
@@ -38,7 +38,7 @@ public class TipCalculator {
         //printing items ordered
 
         for (int i = 0; i < fullOrder.size(); i++) { //iterates through list
-            Order newFood = (Order) fullOrder.get(i);
+            Order newFood = fullOrder.get(i);
             System.out.println("Item #" + (i + 1) + ": " + newFood.getFoodName() + " - $" + df.format(newFood.getFoodPrice()));
         }
         //Calculating total tip
