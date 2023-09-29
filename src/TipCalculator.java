@@ -3,16 +3,16 @@ import java.text.*;
 public class TipCalculator {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        DecimalFormat df = new DecimalFormat("#.00");
-        ArrayList<Object> fullOrder = new ArrayList<Object>();
+        DecimalFormat df = new DecimalFormat("#.00"); //used to format decimals
+        ArrayList<Object> fullOrder = new ArrayList<>(); //making lists
 
-        //list variables
+        //variables
         double itemCost;
         String food = "0";
         double total = 0;
 
         //printing info
-        System.out.println("Welcome to a Restaurant!");
+        System.out.println("Welcome to Gavin's Restaurant!");
         System.out.print("How many people are you dining with?: ");
         int people = scan.nextInt();
         System.out.print("What percentage would you like to tip? (0 - 100): ");
@@ -25,24 +25,24 @@ public class TipCalculator {
         while (!food.equals("Stop") && !food.equals("Done")) { //while loop that asks for food
             System.out.print("What would you like to order?: ");
             food = scan.nextLine();
-            if (!food.equals("Stop") && !food.equals("Done")) {
+            if (!food.equals("Stop") && !food.equals("Done")) { //If the user enters Stop or Done then the while loop stops
                 System.out.print("How much is the item you are ordering?: ");
                 itemCost = scan.nextDouble();
                 Order newFood = new Order(food,itemCost); //creates a new object
-                fullOrder.add(newFood); //adds object
+                fullOrder.add(newFood); //adds object to Arraylist newFood
                 total += itemCost; //calculates total
                 scan.nextLine(); //clears scanner
             }
         }
         System.out.println("------------------------");
         //printing items ordered
-        for (int i = 0; i < fullOrder.size(); i++) {
+
+        for (int i = 0; i < fullOrder.size(); i++) { //iterates through list
             Order newFood = (Order) fullOrder.get(i);
-            System.out.println("Item #" + (i + 1) + ": " + newFood.foodName + " - $" + df.format(newFood.foodPrice));
+            System.out.println("Item #" + (i + 1) + ": " + newFood.getFoodName() + " - $" + df.format(newFood.getFoodPrice()));
         }
         //Calculating total tip
         double tip = Math.round(((tipPercentage / 100) * total) * 100) / 100.0;
-
         //printing statements
         System.out.println("------------------------");
         System.out.println("Total bill before tip: $" + df.format(total));
