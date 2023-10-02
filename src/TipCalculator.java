@@ -41,17 +41,17 @@ public class TipCalculator {
             System.out.println("Item #" + (i + 1) + ": " + newFood.getFoodName() + " - $" + df.format(newFood.getFoodPrice()));
         }
         //Calculating total tip
-        double tip = Math.round(((tipPercentage / 100) * total) * 100) / 100.0;
+        double tip = (tipPercentage / 100) * total;
 
         //printing statements
         System.out.println("------------------------");
-        System.out.println("Total bill before tip: $" + df.format(total));
+        System.out.println("Total bill before tip: $" + df.format(total + .005));
         System.out.println("Total tip percentage: " + df.format(tipPercentage) + "%");
-        System.out.println("Total tip: $" + df.format(tip));
-        System.out.println("Total bill with tip: $" + df.format(Math.round((total + tip) * 100) / 100.0));
-        System.out.println("Cost per person before tip: $" + df.format(Math.round(total / people * 100) / 100.0));
-        System.out.println("Tip per person: $" + df.format(Math.round(tip / people * 100) / 100.0));
-        System.out.println("Total cost per person: $" + df.format(Math.round((tip + total) / people * 100) / 100.0));
+        System.out.println("Total tip: $" + df.format(tip + .005));
+        System.out.println("Total bill with tip: $" + df.format(total + tip + .005));
+        System.out.println("Cost per person before tip: $" + df.format(total / people + .005));
+        System.out.println("Tip per person: $" + df.format(tip / people + .005));
+        System.out.println("Total cost per person: $" + df.format((tip + total) / people + .005));
         System.out.println("------------------------");
     }
 }
