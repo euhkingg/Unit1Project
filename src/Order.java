@@ -1,8 +1,16 @@
 public class Order {
-    double foodPrice;
-    String foodName;
-    public Order(String food, double price) { //Creating order class to store food and price
+    private double foodPrice;
+    private String foodName;
+    public Order(String food, double price) { //Creating a constructor to store food and price
         foodName = food;
         foodPrice = price;
+    }
+
+    //Getters
+    public double getFoodPrice() {
+        return foodPrice;
+    }
+    public String getFoodName() {
+        return foodName;
     }
 }
