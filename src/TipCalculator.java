@@ -6,7 +6,7 @@ public class TipCalculator {
         DecimalFormat df = new DecimalFormat("#.00");
         ArrayList<Object> fullOrder = new ArrayList<>();
 
-        //list variables
+        //variables
         double itemCost;
         String food = "0";
         double total = 0;
